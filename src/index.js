@@ -81,11 +81,7 @@ function createEos(config) {
   abis.push(abiCache.abi('eosio', system))
 
   if(!config.chainId) {
-    config.chainId = 'cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f'
-  }
-
-  if(network) {
-    checkChainId(network, config.chainId, config.logger)
+    config.chainId = 'aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906'
   }
 
   if(config.mockTransactions != null) {
@@ -291,22 +287,5 @@ const defaultSignProvider = (eos, config) => async function({
     }
 
     return sigs
-  })
-}
-
-function checkChainId(network, chainId, logger) {
-  network.getInfo({}).then(info => {
-    if(info.chain_id !== chainId) {
-      if(logger.log) {
-        logger.log(
-          'chainId mismatch, signatures will not match transaction authority. ' +
-          `expected ${chainId} !== actual ${info.chain_id}`
-        )
-      }
-    }
-  }).catch(error => {
-    if(logger.error) {
-      logger.error('Warning, unable to validate chainId: ' + error.message)
-    }
   })
 }
