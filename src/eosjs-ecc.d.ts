@@ -1,1 +1,1 @@
-declare module "eosjs-ecc";
+declare module "pefish-eosjs-ecc";
